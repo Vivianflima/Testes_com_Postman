@@ -1,0 +1,51 @@
+{
+	"id": "96e6d307-fbf8-40cb-95c1-755a4a16f433",
+	"name": "Weather",
+	"values": [
+		{
+			"key": "city",
+			"value": "{{city}}",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "CIDADE",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "PAÍS",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "TEMPO",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "TEMPERATURA",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "SENSAÇÃO TÉRMICA",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "HUMIDADE",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2022-01-07T17:10:42.620Z",
+	"_postman_exported_using": "Postman/9.7.1"
+}
