@@ -1,0 +1,98 @@
+{
+	"info": {
+		"_postman_id": "656f4d9c-6404-4a92-b0ce-50ed2c9a71a6",
+		"name": "Weather",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18751199"
+	},
+	"item": [
+		{
+			"name": "WeatherConsult",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"function cityWeather() {\r",
+							"\r",
+							"    var city = [\"Maua\",\"Suzano\",\"Curitiba\",\"Londres\",\"Tokyo\",\"Uberaba\", \"Cuiaba\",\"Aracaju\",\"Salvador\",\"Paris\",\"Veneza\", \"Lisboa\", \"Nairobi\", \"Bogota\", \"Rio de Jameiro\", \"Palermo\", \"Berlim\", \"Porto Alegre\"];\r",
+							"\r",
+							"    var randomItem = city[Math.floor(Math.random() * city.length)];\r",
+							"    \r",
+							"    return randomItem; \r",
+							"}\r",
+							"\r",
+							"pm.variables.set(\"city\", cityWeather());\r",
+							"pm.sendRequest(\"https://postman-echo.com/get\", function (err, response) {\r",
+							"    console.log(response.json());\r",
+							"});\r",
+							"\r",
+							"console.log(cityWeather())"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CIDADE\", JSON.parse(responseBody).name);\r",
+							"\r",
+							"pm.environment.set(\"PAÍS\", JSON.parse(responseBody).sys.country);\r",
+							"\r",
+							"pm.environment.set(\"TEMPO\", JSON.parse(responseBody).weather[0].description);\r",
+							"\r",
+							"pm.environment.set(\"TEMPERATURA\", JSON.parse(responseBody).main.temp);\r",
+							"\r",
+							"pm.environment.set(\"SENSAÇÃO TÉRMICA\", JSON.parse(responseBody).main.feels_like);\r",
+							"\r",
+							"pm.environment.set(\"HUMIDADE\", JSON.parse(responseBody).main.humidity);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.openweathermap.org/data/2.5/weather?q={{city}}&units=metric&appid=36027680ca898844a5973e59817d71ab&lang=pt_br",
+					"protocol": "http",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{{city}}"
+						},
+						{
+							"key": "units",
+							"value": "metric"
+						},
+						{
+							"key": "appid",
+							"value": "36027680ca898844a5973e59817d71ab"
+						},
+						{
+							"key": "lang",
+							"value": "pt_br"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

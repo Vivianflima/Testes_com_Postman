@@ -1,0 +1,84 @@
+{
+	"info": {
+		"_postman_id": "0c555886-b39f-4a01-9ade-c0d214ffed3e",
+		"name": "API BACKEND Qa.Coders",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18751199"
+	},
+	"item": [
+		{
+			"name": "Register - POST faker",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"randomFullName\", pm.variables.replaceIn('{{$randomFullName}}'));\r",
+							"\r",
+							"pm.environment.set(\"cpf_number\",pm.variables.replaceIn('{{$randomBankAccount}}')+pm.variables.replaceIn('{{$randomInt}}'));\r",
+							"\r",
+							"pm.environment.set(\"Email\", pm.variables.replaceIn('{{$randomEmail}}'));\r",
+							"pm.environment.set(\"phone\", pm.variables.replaceIn('{{$randomPhoneNumber}}'));\r",
+							"pm.environment.set(\"adrress\", pm.variables.replaceIn('{{$randomStreetName}}'));\r",
+							"pm.environment.set(\"number\", pm.variables.replaceIn('{{$randomInt}}'));\r",
+							"pm.environment.set(\"complement\", pm.variables.replaceIn('{{$randomLoremWords}}'));\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.environment.set(\"Nome Completo\", JSON.parse(responseBody).fullName);\r",
+							"\r",
+							"pm.environment.set(\"número CPF\",JSON.parse(responseBody).cpf);\r",
+							"\r",
+							"pm.environment.set(\"e-mail\", JSON.parse(responseBody).mail);\r",
+							"\r",
+							"pm.environment.set(\"Telefone\", JSON.parse(responseBody).phone);\r",
+							"\r",
+							"pm.environment.set(\"Endereço\", JSON.parse(responseBody).address);\r",
+							"\r",
+							"pm.environment.set(\"Número\", JSON.parse(responseBody).number);\r",
+							"\r",
+							"pm.environment.set(\"Complemento\", JSON.parse(responseBody).complement);\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fullName\": \"{{randomFullName}}\",\r\n    \"cpf\": \"{{cpf_number}}\",\r\n    \"mail\": \"{{Email}}\",\r\n    \"phone\": \"{{phone}}\",\r\n    \"address\": \"{{adrress}}\",\r\n    \"number\": \"{{number}}\",\r\n    \"complement\": \"{{complement}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/register",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
